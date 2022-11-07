@@ -1,0 +1,23 @@
+{
+  "name": "zoom-webpage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Henry-UN/zoom-webpage.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Henry-UN/zoom-webpage/issues"
+  },
+  "homepage": "https://github.com/Henry-UN/zoom-webpage#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
