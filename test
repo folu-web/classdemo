@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    tools {
+        nodejs "nodejs"
+    }
+
+    stages {
+        stage('Gitclone') {
+            steps {
+                // Get some code from a GitHub repository
+                git branch: 'main', credentialsId: 'git-ssh', url: 'https://github.com/folu-web/classdemo.git'
+            }
+        }
+        stage('NPM Install') {
+          steps {
+            sh 'npm install'
+            //sh '<<Build Command>>'
+          }
+        }
+        
+        stage('Docker Build') {
+          steps {
+            sh 'sudo docker stop zoom-dem'
+            sh 'sudo docker rm zoom-dem'
+            sh 'sudo docker build -t folumii/zoom-dem .'
+            sh 'sudo docker login -u folumii -p dckr_pat_3htEwdzErAa3N4Doxkyo_XcBx6k'
+            sh 'sudo docker push folumii/zoom-dem:latest'
+            sh 'sudo docker rmi folumii/zoom-dem:latest'          
+        }
+          }
+        
+        
+        stage('Run application') {
+          steps {
+            sh 'sudo docker run --name zoom-demo -d -p 5500:3200 folumii/zoom-dem:latest'
+          }
+        }
+    }
+}
